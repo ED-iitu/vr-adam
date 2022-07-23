@@ -24,6 +24,11 @@
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link href="{{asset("assets/plugins/global/plugins.bundle.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{asset("assets/css/style.bundle.css")}}" rel="stylesheet" type="text/css" />
+    <style>
+        .form-floating .form-select {
+            padding-top: 1rem;
+        }
+    </style>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -158,7 +163,7 @@
                     <!--begin::Page title-->
                     <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-2 pb-5 pb-lg-0 pt-7 pt-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
                         <!--begin::Heading-->
-                        <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">@yield('title')
+                        <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1">@yield('title')</h1>
                         <!--end::Heading-->
                     </div>
                     <!--end::Page title=-->
@@ -959,6 +964,8 @@
 <script src="{{asset("assets/js/custom/widgets.js")}}"></script>
 <script src="{{asset("assets/js/custom/apps/chat/chat.js")}}"></script>
 <script src="{{asset("assets/js/custom/utilities/modals/users-search.js")}}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+
 <script>
     $(".js-is-destroy").on("click", function (e) {
         e.preventDefault();
@@ -978,6 +985,57 @@
             return
         }
     });
+
+    $(document).ready(function(){
+        $("#kt_daterangepicker_3_start").daterangepicker({
+                timePicker: true,
+                singleDatePicker: true,
+                showDropdowns: true,
+                minYear: 1901,
+                maxYear: parseInt(moment().format("YYYY"),10),
+                locale: {
+                    format: "YYYY-MM-DD hh:mm:ss"
+                }
+            }, function(start, end, label) {
+                var years = moment().diff(start, "years");
+            }
+        );
+
+        $("#kt_daterangepicker_3_end").daterangepicker({
+                timePicker: true,
+                singleDatePicker: true,
+                showDropdowns: true,
+                minYear: 1901,
+                maxYear: parseInt(moment().format("YYYY"),10),
+                locale: {
+                    format: "YYYY-MM-DD hh:mm:ss"
+                }
+            }, function(start, end, label) {
+                var years = moment().diff(start, "years");
+            }
+        );
+    });
+
+    $(document).ready(function(){
+        ClassicEditor
+            .create(document.querySelector('#kt_docs_ckeditor_classic'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        ClassicEditor
+            .create(document.querySelector('#kt_docs_ckeditor_classic_full'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
 </script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->

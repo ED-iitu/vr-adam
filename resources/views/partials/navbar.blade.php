@@ -65,7 +65,7 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('course_categories')}}">
+                        <a class="menu-link" href="{{route('courseCategory.index')}}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -165,7 +165,7 @@
                         </a>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="{{route('product_categories')}}">
+                        <a class="menu-link" href="{{route('productCategory.index')}}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>

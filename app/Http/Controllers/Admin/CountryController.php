@@ -1,23 +1,23 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\City;
 use App\Models\Country;
 use App\Models\Region;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class CountryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $cities = City::all();
+        $countries = Country::all();
 
-        return view('admin.city.index', [
-            'cities' => $cities
+        return view('admin.country.index', [
+            'countries' => $countries
         ]);
     }
 
@@ -27,12 +27,10 @@ class CityController extends Controller
     public function create()
     {
         $regions = Region::all();
-        $countries = Country::all();
 
-        return view('admin.city.form', [
-            'countries' => $countries,
+        return view('admin.country.form', [
             'regions' => $regions,
-            'action' => route('city.store')
+            'action' => route('country.store')
         ]);
     }
 
@@ -43,20 +41,20 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        City::create($request->all());
+        Country::create($request->all());
 
-        return view('admin.city.index', [
-            'cities' => City::all()
+        return view('admin.country.index', [
+            'countries' => Country::all()
         ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function show(City $city)
+    public function show(Country $country)
     {
         //
     }
@@ -64,18 +62,16 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Country  $country
      */
-    public function edit(City $city)
+    public function edit(Country $country)
     {
-        $regions = Region::all();
-        $countries = Country::all();
+        $regions   = Region::all();
 
-        return view('admin.city.form', [
-            'city' => $city,
+        return view('admin.country.form', [
+            'country' => $country,
             'regions' => $regions,
-            'countries' => $countries,
-            'action' => route('city.update', $city)
+            'action' => route('country.update', $country)
         ]);
     }
 
@@ -83,25 +79,25 @@ class CityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Country  $country
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, Country $country)
     {
-        $city->update($request->all());
+        $country->update($request->all());
 
-        return view('admin.city.index', [
-            'cities' => City::all()
+        return view('admin.country.index', [
+            'countries' => Country::all()
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Country  $country
      */
-    public function destroy(City $city)
+    public function destroy(Country $country)
     {
-        $city->delete();
+        $country->delete();
 
         return redirect()->back();
     }

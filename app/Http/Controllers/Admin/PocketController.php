@@ -13,28 +13,35 @@ class PocketController extends Controller
      */
     public function index()
     {
-        return view('admin.pocket.index');
+        $pockets = Pocket::all();
+
+        return view('admin.pocket.index', [
+            'pockets' => $pockets
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.pocket.form', [
+            'action' => route('pocket.store')
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        Pocket::create($request->all());
+
+        return view('admin.pocket.index', [
+            'pockets' => Pocket::all()
+        ]);
     }
 
     /**
@@ -52,11 +59,13 @@ class PocketController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Pocket  $pocket
-     * @return \Illuminate\Http\Response
      */
     public function edit(Pocket $pocket)
     {
-        //
+        return view('admin.pocket.form', [
+            'action' => route('pocket.update', $pocket),
+            'pocket' => $pocket
+        ]);
     }
 
     /**
@@ -64,11 +73,14 @@ class PocketController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Pocket  $pocket
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Pocket $pocket)
     {
-        //
+        $pocket->update($request->all());
+
+        return view('admin.pocket.index', [
+            'pockets' => Pocket::all()
+        ]);
     }
 
     /**
@@ -79,6 +91,8 @@ class PocketController extends Controller
      */
     public function destroy(Pocket $pocket)
     {
-        //
+        $pocket->delete();
+
+        return back();
     }
 }

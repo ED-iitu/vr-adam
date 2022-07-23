@@ -3,47 +3,52 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\County;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
-class CountyController extends Controller
+class ProductCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.country.index');
+        $productCategories = ProductCategory::all();
+
+        return view('admin.product.category.index', [
+           'categories' => $productCategories
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.product.category.form', [
+            'action' => route('productCategory.store')
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        ProductCategory::create($request->all());
+
+        return redirect()->route('productCategory.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\County  $county
+     * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(County $county)
+    public function show(ProductCategory $productCategory)
     {
         //
     }
@@ -51,10 +56,10 @@ class CountyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\County  $county
+     * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(County $county)
+    public function edit(ProductCategory $productCategory)
     {
         //
     }
@@ -63,10 +68,10 @@ class CountyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\County  $county
+     * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, County $county)
+    public function update(Request $request, ProductCategory $productCategory)
     {
         //
     }
@@ -74,10 +79,10 @@ class CountyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\County  $county
+     * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(County $county)
+    public function destroy(ProductCategory $productCategory)
     {
         //
     }

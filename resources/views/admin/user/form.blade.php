@@ -20,7 +20,7 @@
                 @endif
                 <!--begin::Input group-->
                 <div class="form mb-7">
-                    <input type="file" name="avatar" class="form-control" id="avatar" placeholder="Телефон"/>
+                    <input type="file" name="avatar" class="form-control" id="avatar" placeholder="avatar"/>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->

@@ -13,28 +13,35 @@ class RegionController extends Controller
      */
     public function index()
     {
-        return view('admin.region.index');
+        $regions = Region::all();
+
+        return view('admin.region.index', [
+            'regions' => $regions
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.region.form', [
+            'action' => route('region.store')
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        Region::create($request->all());
+
+        return view('admin.region.index', [
+            'regions' => Region::all()
+        ]);
     }
 
     /**
@@ -52,11 +59,13 @@ class RegionController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Region  $region
-     * @return \Illuminate\Http\Response
      */
     public function edit(Region $region)
     {
-        //
+        return view('admin.region.form', [
+            'region' => $region,
+            'action' => route('region.update', $region)
+        ]);
     }
 
     /**
@@ -64,21 +73,25 @@ class RegionController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Region  $region
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Region $region)
     {
-        //
+        $region->update($request->all());
+
+        return view('admin.region.index', [
+            'regions' => Region::all()
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Region  $region
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Region $region)
     {
-        //
+        $region->delete();
+
+        return redirect()->back();
     }
 }

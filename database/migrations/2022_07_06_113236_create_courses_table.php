@@ -18,8 +18,8 @@ class CreateCoursesTable extends Migration
             $table->string('title', 255);
             $table->text('short_description');
             $table->text('full_description');
-            $table->integer('old_price');
-            $table->integer('current_price');
+            $table->bigInteger('old_price');
+            $table->bigInteger('current_price');
             $table->boolean('is_cashback_available')->default(false);
             $table->integer('cashback_percent');
             $table->integer('author_id');

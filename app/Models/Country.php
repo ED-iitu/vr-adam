@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Region extends Model
+class Country extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title'
+        'region_id', 'title'
     ];
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
 }
